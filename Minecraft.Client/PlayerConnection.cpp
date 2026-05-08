@@ -1334,8 +1334,10 @@ if (cmd == L"tp" || cmd == L"teleport")
         	warn(L"Usage: /give <player> <item_id>|minecraft:<item_name> [amount] [data]");
         	return;
     	}
-
-    	shared_ptr<ServerPlayer> target = server->getPlayers()->getPlayer(targetName);
+    	shared_ptr<ServerPlayer> target;
+      if (targetName == "@s" || targetName == "@p") { target = player; } else {
+    	  target = server->getPlayers()->getPlayer(targetName);
+    	}
     	if (!target) {
         	warn(L"Player not found: " + targetName);
         	return;
