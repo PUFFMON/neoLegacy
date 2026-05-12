@@ -1502,6 +1502,7 @@ void CMinecraftApp::ApplyGameSettingsChanged(int iPad)
 
 	//TU25
 	ActionGameSettings(iPad, eGameSetting_ClassicCrafting);
+	ActionGameSettings(iPad, eGameSetting_HideSaveSizeBar);
 }
 
 void CMinecraftApp::ActionGameSettings(int iPad,eGameSetting eVal)
@@ -1753,6 +1754,9 @@ void CMinecraftApp::ActionGameSettings(int iPad,eGameSetting eVal)
 #endif
 		break;
 	case eGameSetting_ClassicCrafting:
+		//nothing to do here
+		break;
+	case eGameSetting_HideSaveSizeBar:
 		//nothing to do here
 		break;
 	}
@@ -2512,6 +2516,21 @@ void CMinecraftApp::SetGameSettings(int iPad,eGameSetting eVal,unsigned char ucV
 			GameSettingsA[iPad]->bSettingsChanged = true;
 		}
 		break;
+	case eGameSetting_HideSaveSizeBar:
+		if ((GameSettingsA[iPad]->uiBitmaskValues & GAMESETTING_HIDESAVESIZEBAR) != (ucVal & 0x01) << 27)
+		{
+			if (ucVal == 1)
+			{
+				GameSettingsA[iPad]->uiBitmaskValues |= GAMESETTING_HIDESAVESIZEBAR;
+			}
+			else
+			{
+				GameSettingsA[iPad]->uiBitmaskValues &= ~GAMESETTING_HIDESAVESIZEBAR;
+			}
+			ActionGameSettings(iPad, eVal);
+			GameSettingsA[iPad]->bSettingsChanged = true;
+		}
+		break;
 	}
 }
 
@@ -2649,6 +2668,9 @@ unsigned char CMinecraftApp::GetGameSettings(int iPad,eGameSetting eVal)
 
 	case eGameSetting_ClassicCrafting:
 		return (GameSettingsA[iPad]->uiBitmaskValues & GAMESETTING_CLASSICCRAFTING) >> 26;
+
+	case eGameSetting_HideSaveSizeBar:
+		return (GameSettingsA[iPad]->uiBitmaskValues & GAMESETTING_HIDESAVESIZEBAR) >> 27;
 
 	case eGameSetting_VSync:
 		return (GameSettingsA[iPad]->uiBitmaskValues&GAMESETTING_VSYNC)>>24;
