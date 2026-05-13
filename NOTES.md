@@ -1,13 +1,7 @@
-![Banner](https://github.com/pieeebot/neoLegacy/raw/main/.github/banner.png)
+# neoLegacy v1.0.2b
 
-# neoLegacy v1.0.1b
-
-- Classic Crafting
-- Commands support!
-  - /give
-  - /tp - /teleport
-  - /gamemode
-  - ....
+- Tabs on the Load/Create/Join UI are now clickable.
+- Fixed a crash when switching game modes using `/gamemode` on Windows.
 
 <img width="784" height="410" alt="image" src="https://github.com/user-attachments/assets/3731d5b4-b2d6-4c62-ab52-2e241fb7dcb4" />
 
